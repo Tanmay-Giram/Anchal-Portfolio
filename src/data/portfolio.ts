@@ -5,18 +5,25 @@ export interface Paper {
   id: string;
   title: string;
   pdfPath: string;
-  isAvailable: boolean; // Explicit toggle: true enables actions even if checked; false defers to disk check or placeholder
+  isAvailable: boolean;
   year?: string;
   abstract?: string;
   keywords?: string[];
   citationNote?: string;
-  editorialNote?: string; // e.g. for spelling confirmation
+  editorialNote?: string;
+}
+
+export interface OngoingProject {
+  title: string;
+  description: string;
+  connection?: string;
 }
 
 export interface ResearchTheme {
   title: string;
   description: string;
   areas?: string[];
+  ongoingProject?: OngoingProject;
 }
 
 export interface FieldworkPhoto {
@@ -75,6 +82,7 @@ export interface PortfolioData {
     heading: string;
     intro: string;
     themes: ResearchTheme[];
+    ongoingProject?: OngoingProject;
     sourcesAndMethods?: {
       heading: string;
       description: string;
@@ -107,12 +115,12 @@ export const portfolioData: PortfolioData = {
     eyebrow: "HISTORIAN · RESEARCHER",
     heroHeadline: "Reading the past, understanding the present.",
     heroIntroduction:
-      "I am Anchal Lodhi, a historian interested in the social and cultural histories of South Asia. My work explores questions of craft, knowledge, gender, society, and resistance through historical research and engagement with diverse sources.",
+      "I, Anchal Lodhi, am a post-graduate student in Medieval History at the Centre for Historical Studies, Jawaharlal Nehru University, New Delhi since 2024. I completed my Bachelor’s (2021-2024) as a University Gold Medalist at Guru Ghasidas Vishwavidyalaya.",
     aboutText: [
-      "My academic interests centre on understanding historical societies through their cultural practices, material worlds, knowledge traditions, and social transformations. I am interested in exploring historical questions through diverse textual, material, and oral sources."
+      "My research examines the history of science and technology in medieval India, with a focus on the Deccan. I am particularly interested in the artisans, labourers, and women who produced and carried technical knowledge, and in how oral traditions and community memory preserve their voices. My current research, “From Weapons to Sitars: The Transformation of the Shikalgar Community of Miraj,” traces how a community shifted from weapon-making to instrument-making, and what this change reveals about craft, labour, and knowledge in the Deccan. Through this work, I aim to bring marginalized voices, especially those of women and labouring communities, into the history of science and technology."
     ],
     portrait: {
-      src: "/images/portrait-placeholder.jpg",
+      src: "/images/p.jpeg",
       alt: "Portrait of Anchal Lodhi",
       caption: "Anchal Lodhi · Historian"
     }
@@ -168,13 +176,12 @@ export const portfolioData: PortfolioData = {
     heading: "The Artisans' Archive: Sikalgars",
     description:
       "A research project exploring artisans, craft traditions, and the histories preserved through making and practice.",
-    // Enter video ID or URL here once supplied, e.g. "dQw4w9WgXcQ" or "https://www.youtube.com/watch?v=..."
     youtubeIdOrUrl: "",
     projectTitle: "The Artisans' Archive: Sikalgars"
   },
   cv: {
     filePath: "/cv/anchal-lodhi-cv.pdf",
-    isAvailable: false, // Automatically turns true if anchal-lodhi-cv.pdf exists in public/cv/
+    isAvailable: false, // Automatically true if anchal-lodhi-cv.pdf is present
     title: "Curriculum Vitae",
     introText:
       "Academic background, research experience, selected work, and other relevant information."
@@ -184,23 +191,20 @@ export const portfolioData: PortfolioData = {
       id: "sufi-networks",
       title: "Sufi Networks as Linguistic Bridges",
       pdfPath: "/papers/sufi-networks.pdf",
-      isAvailable: false, // Automatically turns true if sufi-networks.pdf exists in public/papers/
+      isAvailable: false,
       abstract:
         "An exploration of Sufi hospices and networks as vital conduits for cross-regional communication, translation practices, and the forging of shared vernacular idioms in medieval and early modern South Asia.",
       keywords: ["Sufism", "Vernacularization", "Linguistic Exchange", "Medieval South Asia"]
     },
     {
       id: "witch-hunting-chhattisgarh",
-      // NOTE: Flagged spelling of "Tonahi Pratadna Nivaran Adhiniyam" for confirmation against original document
       title:
         "Witch Hunting in Chhattisgarh: Debates and the Making of the Chhattisgarh Tonahi Pratadna Nivaran Adhiniyam, 2005",
       pdfPath: "/papers/witch-hunting-chhattisgarh.pdf",
       isAvailable: false,
       abstract:
         "A critical study of the socio-legal discourses, gender dynamics, and institutional debates that informed the formulation and enactment of the Chhattisgarh Tonahi Pratadna Nivaran Adhiniyam, 2005.",
-      keywords: ["Gender & Law", "Witch-Hunting", "Chhattisgarh", "Legal History", "Subaltern Studies"],
-      editorialNote:
-        "Title spelling flagged for final author confirmation against original document before launch."
+      keywords: ["Gender & Law", "Witch-Hunting", "Chhattisgarh", "Legal History", "Subaltern Studies"]
     },
     {
       id: "musical-instrument-making",
@@ -213,7 +217,7 @@ export const portfolioData: PortfolioData = {
       keywords: [
         "Artisanal Knowledge",
         "Material Science",
-        "Organology",
+        "Acoustics",
         "Oral Traditions",
         "Medieval India"
       ]
@@ -222,10 +226,10 @@ export const portfolioData: PortfolioData = {
       id: "avantibai-lodhi",
       title: "Courage and Resistance: Avantibai Lodhi",
       pdfPath: "/papers/avantibai-lodhi.pdf",
-      isAvailable: false,
+      isAvailable: false, // PDF not available; kept disabled
       abstract:
         "A historical inquiry into Rani Avantibai Lodhi of Ramgarh, examining regional resistance, anti-colonial mobilization during the 1857 rebellion, and the dynamics of gender and community memory in colonial India.",
-      keywords: ["1857 Uprising", "Anti-Colonial Resistance", "Avantibai Lodhi", "Gender & Memory"]
+      keywords: ["1857 Uprising", "Anti-Colonial Resistance", "Avantibai Lodhi", "Gender History"]
     }
   ],
   researchInterests: {
@@ -244,26 +248,43 @@ export const portfolioData: PortfolioData = {
           "Examining the physical and intellectual worlds of artisan guilds, craft lineages, and tool technologies. Analyzing how material objects embody historical knowledge, economic relations, and sensory traditions."
       },
       {
-        title: "Gender, Witch-Hunting, and Histories of Resistance",
+        title: "Gender, Witch-Hunting, and Social Regulation",
         description:
-          "Analyzing the intersections of patriarchal authority, community anxieties, and state mechanisms through the lens of witch-hunting accusations, as well as documenting modes of women's defiance and rebellion in regional histories."
+          "Analyzing the socio-legal mechanisms, patriarchal anxieties, and institutional discourses that surround accusations of witch-hunting, examining how gendered violence intersects with law, customary practice, and community regulation."
+      },
+      {
+        title: "Histories of Resistance",
+        description:
+          "Documenting modes of subaltern, regional, and gendered defiance against colonial authority and dominant social structures, exploring how moments of rebellion reshape political consciousness and historical narratives."
       },
       {
         title: "Oral History and Vernacular Knowledge Systems",
         description:
-          "Engaging with oral testimonies, artisan memories, songs, and non-textual knowledge traditions to recover histories often absent from courtly or colonial archives."
+          "Engaging with oral testimonies, artisan memories, songs, and non-textual traditions to recover historical voices, technical skills, and community epistemologies often absent from institutional archives."
       },
       {
-        title: "Medieval and Early Modern Histories of Technology and Music",
+        title: "Medieval and Early Modern Histories of Science and Technology",
         description:
-          "Studying the material science, metallurgical arts, organology, and technological transfers that underpinned musical performance, instrument fabrication, and artisanal guilds in pre-colonial India."
+          "Studying pre-colonial technological traditions, metallurgical arts, organology, and acoustics, highlighting the artisans and labouring communities who served as creators and custodians of practical scientific knowledge."
       },
       {
-        title: "Languages, Scripts, Translation, and Knowledge Circulation",
+        title: "Colonial Disruption and Transformations in Indian Society",
         description:
-          "Exploring polyglot South Asian contexts through manuscript traditions, regional scripts (including Modi and Nastaliq), and the historical bridges formed by linguistic translation and religious networks."
+          "Exploring the ruptures introduced by colonial governance, codification, and Western institutional frameworks into indigenous social structures, knowledge networks, and traditional occupations."
+      },
+      {
+        title: "Collective Memory and History",
+        description:
+          "Investigating how communities preserve, contest, and transmit historical memory across generations through oral narratives, regional commemorations, and material monuments."
       }
     ],
+    ongoingProject: {
+      title: "Colonial Displacement of Traditional Indian Dentistry",
+      description:
+        "This ongoing research, undertaken with Dr Abhijeet Jaisawal, examines the colonial displacement and transformation of traditional Indian dentistry. It asks how colonial systems of knowledge, professional authority, and institutional change affected indigenous dental practices and the people who sustained them.",
+      connection:
+        "This inquiry aligns with my broader interest in how colonial disruption transformed traditional occupations, artisanal knowledge, and community livelihoods, including questions surrounding the changing occupational world of the Shikalgar community."
+    },
     sourcesAndMethods: {
       heading: "Sources & Methodological Approaches",
       description:

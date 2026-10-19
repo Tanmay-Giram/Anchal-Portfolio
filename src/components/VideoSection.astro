@@ -26,7 +26,6 @@ function extractYouTubeId(input: string): string | null {
       return url.pathname.slice(1) || null;
     }
   } catch {
-    // Return null if invalid URL
     return null;
   }
 
@@ -36,25 +35,25 @@ function extractYouTubeId(input: string): string | null {
 const videoId = extractYouTubeId(youtubeIdOrUrl);
 ---
 
-<section class="py-12 sm:py-16 border-t border-[#DCDAD1]">
+<section class="py-12 sm:py-16 border-t border-[#DCDAD1] dark:border-[#343B33]">
   <div class="space-y-4 mb-8">
     <div class="flex items-center space-x-2">
-      <span class="w-2 h-2 rounded-full bg-[#355745]" aria-hidden="true"></span>
-      <span class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+      <span class="w-2 h-2 rounded-full bg-[#355745] dark:bg-[#7EA488]" aria-hidden="true"></span>
+      <span class="text-xs uppercase tracking-widest text-[#788873] dark:text-[#8C9688] font-semibold">
         Featured Interview
       </span>
     </div>
-    <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+    <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29] dark:text-[#EDEDE8]">
       {heading}
     </h2>
-    <p class="text-sm sm:text-base text-[#545B52] leading-relaxed max-w-2xl font-sans">
+    <p class="text-sm sm:text-base text-[#545B52] dark:text-[#A8B0A5] leading-relaxed max-w-2xl font-sans">
       {description}
     </p>
   </div>
 
   <div class="max-w-4xl">
     {videoId ? (
-      <div class="relative w-full aspect-video rounded-sm overflow-hidden bg-[#292D29] border border-[#DCDAD1] shadow-sm">
+      <div class="relative w-full aspect-video rounded-sm overflow-hidden bg-[#292D29] dark:bg-[#121412] border border-[#DCDAD1] dark:border-[#343B33] shadow-sm">
         <iframe
           class="absolute inset-0 w-full h-full"
           src={`https://www.youtube-nocookie.com/embed/${videoId}`}
@@ -65,25 +64,25 @@ const videoId = extractYouTubeId(youtubeIdOrUrl);
         />
       </div>
     ) : (
-      <div class="relative w-full aspect-video rounded-sm overflow-hidden bg-[#EAE9E1] border border-[#DCDAD1] flex flex-col items-center justify-center p-6 sm:p-10 text-center group">
-        <div class="w-16 h-16 rounded-full bg-[#F7F6F1] border border-[#DCDAD1] flex items-center justify-center text-[#355745] mb-4 shadow-xs">
+      <div class="relative w-full aspect-video rounded-sm overflow-hidden bg-[#EAE9E1] dark:bg-[#212520] border border-[#DCDAD1] dark:border-[#343B33] flex flex-col items-center justify-center p-6 sm:p-10 text-center group">
+        <div class="w-16 h-16 rounded-full bg-[#F7F6F1] dark:bg-[#171916] border border-[#DCDAD1] dark:border-[#343B33] flex items-center justify-center text-[#355745] dark:text-[#7EA488] mb-4 shadow-xs">
           <svg class="w-7 h-7 translate-x-0.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
           </svg>
         </div>
 
-        <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold mb-1">
+        <p class="text-xs uppercase tracking-widest text-[#788873] dark:text-[#8C9688] font-semibold mb-1">
           Archival Video Recording
         </p>
-        <h3 class="font-serif text-lg sm:text-xl font-medium text-[#292D29] mb-2 max-w-lg">
+        <h3 class="font-serif text-lg sm:text-xl font-medium text-[#292D29] dark:text-[#EDEDE8] mb-2 max-w-lg">
           {projectTitle}
         </h3>
-        <p class="text-xs sm:text-sm text-[#545B52] max-w-md leading-relaxed font-sans mb-4">
+        <p class="text-xs sm:text-sm text-[#545B52] dark:text-[#A8B0A5] max-w-md leading-relaxed font-sans mb-4">
           Documentation of artisan metalworkers, weapon-making lineages, craft memories, and oral traditions.
         </p>
 
-        <div class="inline-flex items-center space-x-1.5 text-[11px] text-[#788873] bg-[#F7F6F1] px-3 py-1 rounded-sm border border-[#DCDAD1]">
-          <span class="w-1.5 h-1.5 rounded-full bg-[#788873]"></span>
+        <div class="inline-flex items-center space-x-1.5 text-[11px] text-[#788873] dark:text-[#8C9688] bg-[#F7F6F1] dark:bg-[#171916] px-3 py-1 rounded-sm border border-[#DCDAD1] dark:border-[#343B33]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#788873] dark:bg-[#8C9688]"></span>
           <span>YouTube video link forthcoming · Configurable in portfolio.ts</span>
         </div>
       </div>

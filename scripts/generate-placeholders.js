@@ -136,12 +136,8 @@ for (const item of fieldworkItems) {
     <text x="600" y="465" font-family="'Times New Roman', Georgia, serif" font-size="28" fill="#292D29" text-anchor="middle" letter-spacing="0.5">${item.title}</text>
     <text x="600" y="500" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#545B52" text-anchor="middle">${item.sub}</text>
 
-    <rect x="420" y="540" width="360" height="32" rx="4" fill="#DFDBCF" stroke="#CBC7BA" stroke-width="1"/>
-    <text x="600" y="561" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11.5" fill="#6A7366" text-anchor="middle" letter-spacing="1">FIELDWORK PHOTOGRAPH ${item.num} · PLACEHOLDER</text>
-
     <!-- Bottom Metadata line -->
     <text x="70" y="815" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#788873" letter-spacing="1.5">ANCHAL LODHI · RESEARCH FIELDWORK</text>
-    <text x="1130" y="815" font-family="'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#788873" text-anchor="end" letter-spacing="1">PLATE ${item.num} / 04</text>
   </svg>
   `;
 

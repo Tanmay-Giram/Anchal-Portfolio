@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://anchallodhi.vercel.app';
-const ogImage = `${siteUrl}/images/portrait-placeholder.jpg`;
+const ogImage = `${siteUrl}/images/portrait.jpeg`;
 ---
 
 <!doctype html>
@@ -28,6 +28,20 @@ const ogImage = `${siteUrl}/images/portrait-placeholder.jpg`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Anti-Flash Theme Initializer (Default: Light) -->
+    <script is:inline>
+      (function() {
+        try {
+          const theme = localStorage.getItem('theme');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -58,11 +72,11 @@ const ogImage = `${siteUrl}/images/portrait-placeholder.jpg`;
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#F7F6F1] text-[#292D29] min-h-screen flex flex-col antialiased selection:bg-[#355745] selection:text-[#F7F6F1]">
+  <body class="bg-[#F7F6F1] dark:bg-[#171916] text-[#292D29] dark:text-[#EDEDE8] min-h-screen flex flex-col antialiased selection:bg-[#355745] selection:text-[#F7F6F1] dark:selection:bg-[#4D6B55] dark:selection:text-[#EDEDE8] transition-colors duration-200">
     <!-- Accessibility Skip Link -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#355745] focus:text-[#F7F6F1] focus:rounded focus:shadow-md focus:outline-none"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#355745] dark:focus:bg-[#7EA488] focus:text-[#F7F6F1] dark:focus:text-[#171916] focus:rounded focus:shadow-md focus:outline-none"
     >
       Skip to main content
     </a>

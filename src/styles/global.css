@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-bg-base: #F7F6F1;
   --color-surface: #EAE9E1;
@@ -28,17 +30,33 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  html.dark {
+    background-color: #171916;
+    color: #EDEDE8;
+  }
+
   body {
     background-color: #F7F6F1;
     color: #292D29;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark body {
+    background-color: #171916;
+    color: #EDEDE8;
   }
 
   ::selection {
     background-color: #355745;
     color: #F7F6F1;
+  }
+
+  html.dark ::selection {
+    background-color: #4D6B55;
+    color: #EDEDE8;
   }
 
   /* Academic typography baseline */
@@ -47,12 +65,25 @@
     color: #292D29;
     letter-spacing: -0.015em;
   }
+
+  html.dark h1,
+  html.dark h2,
+  html.dark h3,
+  html.dark h4,
+  html.dark h5,
+  html.dark h6 {
+    color: #EDEDE8;
+  }
 }
 
 /* Accessible focus ring */
 :focus-visible {
   outline: 2px solid #355745;
   outline-offset: 2px;
+}
+
+html.dark :focus-visible {
+  outline-color: #7EA488;
 }
 
 /* Reduced motion preference */

@@ -11,10 +11,10 @@ const { paper, showAbstract = true } = Astro.props;
 const available = isPaperAvailable(paper);
 ---
 
-<article class="py-7 border-b border-[#DCDAD1] last:border-b-0 space-y-3 group">
+<article class="py-7 border-b border-[#DCDAD1] dark:border-[#343B33] last:border-b-0 space-y-3 group">
   <!-- Title & Actions Row -->
   <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
-    <h3 class="font-serif text-lg sm:text-xl font-medium text-[#292D29] leading-snug max-w-3xl">
+    <h3 class="font-serif text-lg sm:text-xl font-medium text-[#292D29] dark:text-[#EDEDE8] leading-snug max-w-3xl">
       {paper.title}
     </h3>
 
@@ -25,7 +25,7 @@ const available = isPaperAvailable(paper);
             href={paper.pdfPath}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center space-x-1.5 text-[#355745] hover:text-[#264032] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm py-1 px-1.5 -mx-1.5"
+            class="inline-flex items-center space-x-1.5 text-[#355745] dark:text-[#7EA488] hover:text-[#264032] dark:hover:text-[#97BAA0] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] dark:focus-visible:ring-[#7EA488] rounded-sm py-1 px-1.5 -mx-1.5"
             aria-label={`View PDF for ${paper.title} (opens in new tab)`}
           >
             <span>View</span>
@@ -34,12 +34,12 @@ const available = isPaperAvailable(paper);
             </svg>
           </a>
 
-          <span class="text-[#DCDAD1]" aria-hidden="true">·</span>
+          <span class="text-[#DCDAD1] dark:text-[#343B33]" aria-hidden="true">·</span>
 
           <a
             href={paper.pdfPath}
             download
-            class="inline-flex items-center space-x-1.5 text-[#545B52] hover:text-[#355745] transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm py-1 px-1.5 -mx-1.5"
+            class="inline-flex items-center space-x-1.5 text-[#545B52] dark:text-[#A8B0A5] hover:text-[#355745] dark:hover:text-[#7EA488] transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] dark:focus-visible:ring-[#7EA488] rounded-sm py-1 px-1.5 -mx-1.5"
             aria-label={`Download PDF for ${paper.title}`}
           >
             <span>Download</span>
@@ -50,8 +50,8 @@ const available = isPaperAvailable(paper);
         </div>
       ) : (
         <span
-          class="inline-flex items-center text-[11px] text-[#788873] bg-[#EAE9E1] px-2.5 py-0.5 rounded tracking-wide border border-[#DCDAD1]/70"
-          title="This PDF will be active once uploaded by author to public/papers/"
+          class="inline-flex items-center text-[11px] text-[#788873] dark:text-[#8C9688] bg-[#EAE9E1] dark:bg-[#212520] px-2.5 py-0.5 rounded tracking-wide border border-[#DCDAD1]/70 dark:border-[#343B33]"
+          title="PDF currently forthcoming"
         >
           PDF forthcoming
         </span>
@@ -59,23 +59,17 @@ const available = isPaperAvailable(paper);
     </div>
   </div>
 
-  {paper.editorialNote && (
-    <div class="inline-block text-[11px] text-[#788873] bg-[#F7F6F1] border-l-2 border-[#788873] pl-2.5 py-0.5 italic">
-      {paper.editorialNote}
-    </div>
-  )}
-
   {showAbstract && paper.abstract && (
-    <p class="text-sm text-[#545B52] leading-relaxed max-w-3xl font-sans pt-1">
+    <p class="text-sm text-[#545B52] dark:text-[#A8B0A5] leading-relaxed max-w-3xl font-sans pt-1">
       {paper.abstract}
     </p>
   )}
 
   {paper.keywords && paper.keywords.length > 0 && (
     <div class="flex flex-wrap items-center gap-1.5 pt-1">
-      <span class="text-[11px] text-[#788873] font-medium mr-1 uppercase tracking-wider">Themes:</span>
+      <span class="text-[11px] text-[#788873] dark:text-[#8C9688] font-medium mr-1 uppercase tracking-wider">Themes:</span>
       {paper.keywords.map((kw) => (
-        <span class="text-xs text-[#545B52] bg-[#EAE9E1]/80 px-2 py-0.5 rounded-sm">
+        <span class="text-xs text-[#545B52] dark:text-[#A8B0A5] bg-[#EAE9E1]/80 dark:bg-[#282D27] px-2 py-0.5 rounded-sm">
           {kw}
         </span>
       ))}
