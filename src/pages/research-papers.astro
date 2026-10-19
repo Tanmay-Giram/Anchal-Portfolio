@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PaperEntry from '../components/PaperEntry.astro';
+import { portfolioData } from '../data/portfolio';
+
+const { papers } = portfolioData;
+---
+
+<BaseLayout
+  title="Research Papers | Anchal Lodhi"
+  description="Selected research papers by Anchal Lodhi engaging with the social, cultural, material, and intellectual histories of South Asia."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <!-- Header block -->
+    <header class="space-y-4 mb-10 sm:mb-14 pb-8 border-b border-[#DCDAD1]">
+      <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+        Scholarship & Papers
+      </p>
+      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#292D29] tracking-tight">
+        Research Papers
+      </h1>
+      <p class="text-base sm:text-lg text-[#545B52] leading-relaxed max-w-2xl font-sans">
+        Selected work engaging with the social, cultural, material, and intellectual histories of South Asia.
+      </p>
+    </header>
+
+    <!-- Unified List of 4 Research Papers -->
+    <section aria-label="Research Papers List">
+      <div class="divide-y divide-[#DCDAD1]">
+        {papers.map((paper) => (
+          <PaperEntry paper={paper} showAbstract={true} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Editorial & Access Note -->
+    <aside class="mt-14 p-5 sm:p-6 bg-[#EAE9E1]/50 border border-[#DCDAD1] rounded-sm text-xs sm:text-sm text-[#545B52] space-y-2">
+      <p class="font-medium text-[#292D29]">
+        Note on Document Access & Working Copies:
+      </p>
+      <p class="leading-relaxed">
+        Full research paper texts become accessible for viewing and download as finalized PDF drafts are deposited. For questions regarding methodology, sources, citations, or draft manuscripts currently forthcoming, please write directly via email.
+      </p>
+    </aside>
+  </div>
+</BaseLayout>

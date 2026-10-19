@@ -1,0 +1,84 @@
+---
+import type { Paper } from '../data/portfolio';
+import { isPaperAvailable } from '../data/portfolio';
+
+interface Props {
+  paper: Paper;
+  showAbstract?: boolean;
+}
+
+const { paper, showAbstract = true } = Astro.props;
+const available = isPaperAvailable(paper);
+---
+
+<article class="py-7 border-b border-[#DCDAD1] last:border-b-0 space-y-3 group">
+  <!-- Title & Actions Row -->
+  <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+    <h3 class="font-serif text-lg sm:text-xl font-medium text-[#292D29] leading-snug max-w-3xl">
+      {paper.title}
+    </h3>
+
+    <div class="flex items-center space-x-4 flex-shrink-0 pt-1 sm:pt-0">
+      {available ? (
+        <div class="flex items-center space-x-3 text-xs tracking-wide">
+          <a
+            href={paper.pdfPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1.5 text-[#355745] hover:text-[#264032] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm py-1 px-1.5 -mx-1.5"
+            aria-label={`View PDF for ${paper.title} (opens in new tab)`}
+          >
+            <span>View</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
+
+          <span class="text-[#DCDAD1]" aria-hidden="true">·</span>
+
+          <a
+            href={paper.pdfPath}
+            download
+            class="inline-flex items-center space-x-1.5 text-[#545B52] hover:text-[#355745] transition-colors focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm py-1 px-1.5 -mx-1.5"
+            aria-label={`Download PDF for ${paper.title}`}
+          >
+            <span>Download</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+          </a>
+        </div>
+      ) : (
+        <span
+          class="inline-flex items-center text-[11px] text-[#788873] bg-[#EAE9E1] px-2.5 py-0.5 rounded tracking-wide border border-[#DCDAD1]/70"
+          title="This PDF will be active once uploaded by author to public/papers/"
+        >
+          PDF forthcoming
+        </span>
+      )}
+    </div>
+  </div>
+
+  {paper.editorialNote && (
+    <div class="inline-block text-[11px] text-[#788873] bg-[#F7F6F1] border-l-2 border-[#788873] pl-2.5 py-0.5 italic">
+      {paper.editorialNote}
+    </div>
+  )}
+
+  {showAbstract && paper.abstract && (
+    <p class="text-sm text-[#545B52] leading-relaxed max-w-3xl font-sans pt-1">
+      {paper.abstract}
+    </p>
+  )}
+
+  {paper.keywords && paper.keywords.length > 0 && (
+    <div class="flex flex-wrap items-center gap-1.5 pt-1">
+      <span class="text-[11px] text-[#788873] font-medium mr-1 uppercase tracking-wider">Themes:</span>
+      {paper.keywords.map((kw) => (
+        <span class="text-xs text-[#545B52] bg-[#EAE9E1]/80 px-2 py-0.5 rounded-sm">
+          {kw}
+        </span>
+      ))}
+    </div>
+  )}
+</article>

@@ -1,16 +1,249 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import VideoSection from '../components/VideoSection.astro';
+import { portfolioData } from '../data/portfolio';
+
+const { personal, contact, languagesAndScripts, fieldwork, papers } = portfolioData;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Anchal Lodhi | Historian & Researcher"
+  description="Personal academic portfolio of Anchal Lodhi, historian researching social and cultural histories, craft, material culture, gender, and oral knowledge in South Asia."
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-16 sm:space-y-24">
+
+    <!-- Section A: Hero (Two-column editorial on desktop, stacked on mobile) -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center pt-2 sm:pt-6">
+      <!-- Left Column (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="space-y-3">
+          <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+            {personal.eyebrow}
+          </p>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#292D29] leading-[1.18] tracking-tight">
+            {personal.heroHeadline}
+          </h1>
+        </div>
+
+        <p class="text-base sm:text-lg text-[#545B52] leading-relaxed max-w-xl font-sans font-normal">
+          {personal.heroIntroduction}
+        </p>
+
+        <!-- Two Restrained Actions -->
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a
+            href="/research-papers/"
+            class="inline-flex items-center space-x-2 bg-[#355745] hover:bg-[#264032] text-[#F7F6F1] px-5 py-2.5 rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+          >
+            <span>Explore Research</span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            href="/cv/"
+            class="inline-flex items-center space-x-2 bg-[#EAE9E1] hover:bg-[#E2E1D7] text-[#292D29] border border-[#DCDAD1] px-5 py-2.5 rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+          >
+            <span>View CV</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Portrait Placeholder (5 cols) -->
+      <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <figure class="w-full max-w-xs sm:max-w-sm flex flex-col space-y-2.5">
+          <div class="aspect-[4/5] w-full overflow-hidden rounded-sm border border-[#DCDAD1] bg-[#EAE9E1] shadow-xs">
+            <img
+              src={personal.portrait.src}
+              alt={personal.portrait.alt}
+              width="800"
+              height="1000"
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <figcaption class="text-xs text-[#788873] text-center font-sans">
+            {personal.portrait.caption}
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Section B: About -->
+    <section class="border-t border-[#DCDAD1] pt-12 sm:pt-16">
+      <div class="max-w-3xl space-y-4">
+        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+          About
+        </h2>
+        {personal.aboutText.map((paragraph) => (
+          <p class="text-base sm:text-lg text-[#545B52] leading-relaxed font-sans">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section C: Languages & Scripts (Compact, Understated, Anchor: #languages-scripts) -->
+    <section id="languages-scripts" class="border-t border-[#DCDAD1] pt-10 sm:pt-14 scroll-mt-24">
+      <div class="max-w-3xl">
+        <h2 class="font-serif text-xl sm:text-2xl font-medium text-[#292D29] mb-6">
+          Languages & Scripts
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 py-5 px-6 bg-[#EAE9E1]/40 border border-[#DCDAD1] rounded-sm">
+          <!-- Languages Column -->
+          <div class="space-y-3">
+            <h3 class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+              Languages
+            </h3>
+            <ul class="divide-y divide-[#DCDAD1]/60 text-sm font-sans text-[#292D29]">
+              {languagesAndScripts.languages.map((lang) => (
+                <li class="py-1.5 first:pt-0 last:pb-0">
+                  {lang}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Scripts Column -->
+          <div class="space-y-3 sm:border-l sm:border-[#DCDAD1] sm:pl-8">
+            <h3 class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+              Scripts
+            </h3>
+            <ul class="divide-y divide-[#DCDAD1]/60 text-sm font-sans text-[#292D29]">
+              {languagesAndScripts.scripts.map((script) => (
+                <li class="py-1.5 first:pt-0 last:pb-0">
+                  {script}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section D: Fieldwork & Encounters -->
+    <section class="border-t border-[#DCDAD1] pt-12 sm:pt-16">
+      <div class="space-y-3 mb-8 sm:mb-10">
+        <div class="flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-[#355745]" aria-hidden="true"></span>
+          <span class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+            Visual Documentation
+          </span>
+        </div>
+        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+          {fieldwork.heading}
+        </h2>
+        <p class="text-sm sm:text-base text-[#545B52] leading-relaxed max-w-2xl font-sans">
+          {fieldwork.description}
+        </p>
+      </div>
+
+      <PhotoGallery />
+    </section>
+
+    <!-- Section E: Featured Video -->
+    <VideoSection />
+
+    <!-- Section F: Selected Research (Compact preview, no long abstracts) -->
+    <section class="border-t border-[#DCDAD1] pt-12 sm:pt-16">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div class="space-y-2">
+          <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+            Academic Papers
+          </p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+            Selected Research
+          </h2>
+        </div>
+        <a
+          href="/research-papers/"
+          class="inline-flex items-center space-x-1.5 text-sm font-medium text-[#355745] hover:text-[#264032] group py-1"
+        >
+          <span>View All Research</span>
+          <span class="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Compact 4 Papers Title List -->
+      <div class="divide-y divide-[#DCDAD1] border-y border-[#DCDAD1]">
+        {papers.map((paper, idx) => (
+          <div class="py-4.5 sm:py-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 group">
+            <div class="flex items-baseline space-x-3 sm:space-x-4">
+              <span class="text-xs font-mono text-[#788873] flex-shrink-0">
+                0{idx + 1}
+              </span>
+              <a
+                href="/research-papers/"
+                class="font-serif text-base sm:text-lg text-[#292D29] group-hover:text-[#355745] transition-colors leading-snug"
+              >
+                {paper.title}
+              </a>
+            </div>
+            <a
+              href="/research-papers/"
+              class="text-xs text-[#788873] group-hover:text-[#355745] flex-shrink-0 ml-7 sm:ml-0 inline-flex items-center space-x-1 font-sans"
+            >
+              <span>Details</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section G: Contact Call to Action -->
+    <section class="border-t border-[#DCDAD1] pt-12 sm:pt-16 pb-6">
+      <div class="bg-[#EAE9E1]/50 border border-[#DCDAD1] rounded-sm p-6 sm:p-10 lg:p-12 space-y-6">
+        <div class="max-w-2xl space-y-3">
+          <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+            Inquiries & Exchange
+          </p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+            Research, exchange, and collaboration.
+          </h2>
+          <p class="text-sm sm:text-base text-[#545B52] leading-relaxed font-sans">
+            For academic conversations, research-related enquiries, and potential collaboration, please feel free to get in touch.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <!-- Email Button -->
+          <a
+            href={`mailto:${contact.email}`}
+            class="inline-flex items-center space-x-2 bg-[#355745] hover:bg-[#264032] text-[#F7F6F1] px-5 py-2.5 rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            <span>{contact.emailDisplay}</span>
+          </a>
+
+          <!-- LinkedIn Link -->
+          <a
+            href={contact.linkedInUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1.5 bg-[#F7F6F1] hover:bg-[#EAE9E1] text-[#292D29] border border-[#DCDAD1] px-4 py-2.5 rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+          >
+            <span>LinkedIn</span>
+            <span class="text-xs text-[#788873]" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- Academia.edu Link -->
+          <a
+            href={contact.academiaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center space-x-1.5 bg-[#F7F6F1] hover:bg-[#EAE9E1] text-[#292D29] border border-[#DCDAD1] px-4 py-2.5 rounded-sm text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+          >
+            <span>Academia.edu</span>
+            <span class="text-xs text-[#788873]" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

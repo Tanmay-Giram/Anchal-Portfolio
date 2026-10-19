@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-base: #F7F6F1;
+  --color-surface: #EAE9E1;
+  --color-surface-hover: #E2E1D7;
+  --color-text-main: #292D29;
+  --color-text-muted: #545B52;
+  --color-text-subtle: #788873;
+  --color-accent: #355745;
+  --color-accent-hover: #264032;
+  --color-accent-light: #EBF0EC;
+  --color-accent-secondary: #788873;
+  --color-border-subtle: #DCDAD1;
+  --color-border-hover: #BAB8AB;
+
+  --font-serif: "Newsreader", "Cormorant Garamond", "Source Serif 4", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: #F7F6F1;
+    color: #292D29;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #F7F6F1;
+    color: #292D29;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  ::selection {
+    background-color: #355745;
+    color: #F7F6F1;
+  }
+
+  /* Academic typography baseline */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: #292D29;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #355745;
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

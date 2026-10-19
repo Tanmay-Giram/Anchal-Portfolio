@@ -1,0 +1,235 @@
+---
+import { portfolioData } from '../data/portfolio';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Research Papers', href: '/research-papers/' },
+  { label: 'Research Interests', href: '/research-interests/' },
+  { label: 'CV', href: '/cv/' }
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/' || currentPath === '';
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-40 w-full bg-[#F7F6F1]/95 backdrop-blur-md border-b border-[#DCDAD1] transition-all">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between">
+    <!-- Left: Wordmark -->
+    <a
+      href="/"
+      class="group inline-flex flex-col focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm py-1"
+      aria-label="Anchal Lodhi - Home"
+    >
+      <span class="font-serif text-xl sm:text-2xl font-medium tracking-tight text-[#292D29] group-hover:text-[#355745] transition-colors">
+        Anchal Lodhi
+      </span>
+      <span class="text-[10px] tracking-widest uppercase text-[#788873] font-sans -mt-0.5 hidden xs:block">
+        Historian · Researcher
+      </span>
+    </a>
+
+    <!-- Center/Desktop: Navigation Links -->
+    <nav class="hidden md:flex items-center space-x-7 lg:space-x-8" aria-label="Main Navigation">
+      {navItems.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm tracking-wide transition-all relative py-1 focus-visible:ring-2 focus-visible:ring-[#355745] rounded-sm',
+              active
+                ? 'text-[#355745] font-semibold'
+                : 'text-[#545B52] hover:text-[#292D29]'
+            ]}
+            aria-current={active ? 'page' : undefined}
+          >
+            {item.label}
+            {active && (
+              <span class="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#355745] rounded-full" />
+            )}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right/Desktop: Social & Contact Icons -->
+    <div class="hidden md:flex items-center space-x-3.5 pl-4 border-l border-[#DCDAD1]">
+      <!-- LinkedIn -->
+      <a
+        href={portfolioData.contact.linkedInUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] p-2 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+        aria-label="LinkedIn profile of Anchal Lodhi (opens in new tab)"
+        title="LinkedIn: /in/anchal-lodhi"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24m1.4 10.74v-8.37H5.06v8.37z"/>
+        </svg>
+      </a>
+
+      <!-- Academia.edu -->
+      <a
+        href={portfolioData.contact.academiaUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] p-2 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+        aria-label="Academia.edu profile of Anchal Lodhi (opens in new tab)"
+        title="Academia.edu: jnu.academia.edu/AnchalLodhi"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a
+        href={`mailto:${portfolioData.contact.email}`}
+        class="text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] p-2 rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-[#355745]"
+        aria-label={`Send email to ${portfolioData.contact.email}`}
+        title={`Email: ${portfolioData.contact.email}`}
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="flex items-center space-x-2 md:hidden">
+      <!-- Direct Email Quick Link on mobile -->
+      <a
+        href={`mailto:${portfolioData.contact.email}`}
+        class="text-[#545B52] hover:text-[#355745] p-2 rounded-md focus-visible:ring-2 focus-visible:ring-[#355745]"
+        aria-label="Email Anchal Lodhi"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+        </svg>
+      </a>
+
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="inline-flex items-center justify-center p-2 rounded-md text-[#292D29] hover:bg-[#EAE9E1] hover:text-[#355745] focus-visible:ring-2 focus-visible:ring-[#355745]"
+        aria-controls="mobile-nav-dialog"
+        aria-expanded="false"
+        aria-label="Toggle navigation menu"
+      >
+        <svg id="menu-icon-open" class="block w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg id="menu-icon-close" class="hidden w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div
+    id="mobile-nav-dialog"
+    class="hidden md:hidden border-b border-[#DCDAD1] bg-[#F7F6F1] px-4 pt-3 pb-6 transition-all"
+    aria-label="Mobile Navigation"
+  >
+    <div class="space-y-1">
+      {navItems.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'block px-3 py-2.5 rounded-md text-base transition-colors font-medium',
+              active
+                ? 'bg-[#EAE9E1] text-[#355745] font-semibold'
+                : 'text-[#292D29] hover:bg-[#EAE9E1]/70 hover:text-[#355745]'
+            ]}
+            aria-current={active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Mobile Social/Contact Section -->
+    <div class="mt-5 pt-4 border-t border-[#DCDAD1]">
+      <p class="text-xs uppercase tracking-wider text-[#788873] font-semibold mb-2 px-3">
+        Academic Profiles & Inquiries
+      </p>
+      <div class="flex items-center space-x-2 px-1">
+        <a
+          href={portfolioData.contact.linkedInUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center space-x-2 px-3 py-2 text-sm text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] rounded-md transition-colors"
+          aria-label="LinkedIn profile"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.62 1.62 0 1 0 0-3.24 1.62 1.62 0 0 0 0 3.24m1.4 10.74v-8.37H5.06v8.37z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <a
+          href={portfolioData.contact.academiaUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center space-x-2 px-3 py-2 text-sm text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] rounded-md transition-colors"
+          aria-label="Academia.edu profile"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+          </svg>
+          <span>Academia.edu</span>
+        </a>
+
+        <a
+          href={`mailto:${portfolioData.contact.email}`}
+          class="flex items-center space-x-2 px-3 py-2 text-sm text-[#545B52] hover:text-[#355745] hover:bg-[#EAE9E1] rounded-md transition-colors"
+          aria-label="Email Anchal Lodhi"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu interaction
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-nav-dialog');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
+
+  if (toggleBtn && mobileMenu && openIcon && closeIcon) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        toggleBtn.focus();
+      }
+    });
+  }
+</script>

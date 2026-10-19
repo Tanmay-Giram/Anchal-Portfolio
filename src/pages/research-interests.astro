@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { portfolioData } from '../data/portfolio';
+
+const { researchInterests } = portfolioData;
+---
+
+<BaseLayout
+  title="Research Interests | Anchal Lodhi"
+  description="Research interests of Anchal Lodhi spanning social and cultural histories, artisans, craftsmanship, material culture, gender, and oral knowledge systems in South Asia."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <!-- Header Block -->
+    <header class="space-y-4 mb-10 sm:mb-14 pb-8 border-b border-[#DCDAD1]">
+      <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+        Intellectual Trajectory
+      </p>
+      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#292D29] tracking-tight">
+        {researchInterests.heading}
+      </h1>
+      <p class="text-base sm:text-lg text-[#545B52] leading-relaxed max-w-2xl font-sans">
+        {researchInterests.intro}
+      </p>
+    </header>
+
+    <!-- Thematic Areas -->
+    <section class="space-y-10" aria-label="Research Themes">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {researchInterests.themes.map((theme, index) => (
+          <div class="p-6 bg-[#EAE9E1]/30 border border-[#DCDAD1] rounded-sm space-y-3 hover:border-[#BAB8AB] transition-colors">
+            <div class="flex items-center space-x-2.5">
+              <span class="text-xs font-mono text-[#788873]">
+                0{index + 1}
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#355745]"></span>
+            </div>
+            <h2 class="font-serif text-xl font-medium text-[#292D29] leading-snug">
+              {theme.title}
+            </h2>
+            <p class="text-sm text-[#545B52] leading-relaxed font-sans">
+              {theme.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Optional Sources & Methodological Approaches Subsection -->
+    {researchInterests.sourcesAndMethods && (
+      <section class="mt-16 pt-12 border-t border-[#DCDAD1] space-y-6" aria-label="Sources and Methods">
+        <div class="space-y-2">
+          <p class="text-xs uppercase tracking-widest text-[#788873] font-semibold">
+            Methodology & Archives
+          </p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#292D29]">
+            {researchInterests.sourcesAndMethods.heading}
+          </h2>
+          <p class="text-sm sm:text-base text-[#545B52] leading-relaxed max-w-2xl font-sans">
+            {researchInterests.sourcesAndMethods.description}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          {researchInterests.sourcesAndMethods.items.map((item) => (
+            <div class="flex items-start space-x-3 p-3.5 bg-[#F7F6F1] border border-[#DCDAD1] rounded-sm text-sm text-[#292D29]">
+              <svg class="w-4 h-4 text-[#355745] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Prospective PhD Supervisor & Collaboration Note -->
+    <aside class="mt-14 p-6 bg-[#EAE9E1]/40 border border-[#DCDAD1] rounded-sm text-sm text-[#545B52] space-y-2">
+      <h3 class="font-serif text-base font-medium text-[#292D29]">
+        For Prospective Supervisors & Academic Collaborators
+      </h3>
+      <p class="leading-relaxed text-xs sm:text-sm">
+        These themes reflect current intellectual commitments and prospective doctoral research inquiries. I welcome discussions regarding thematic alignments, source collections, and methodological frameworks.
+      </p>
+    </aside>
+  </div>
+</BaseLayout>
