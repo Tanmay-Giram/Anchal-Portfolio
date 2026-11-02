@@ -176,8 +176,8 @@ export const portfolioData: PortfolioData = {
     heading: "The Artisans' Archive: Sikalgars",
     description:
       "A research project exploring artisans, craft traditions, and the histories preserved through making and practice.",
-    youtubeIdOrUrl: "",
-    projectTitle: "The Artisans' Archive: Sikalgars"
+    youtubeIdOrUrl: "https://youtu.be/OJSN4L79eKs?si=uq0KqXBEIIymi2p8",
+    projectTitle: "Recording history through Oral tradition : Shikalgar Community"
   },
   cv: {
     filePath: "/cv/anchal-lodhi-cv.pdf",
